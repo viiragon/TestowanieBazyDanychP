@@ -7,6 +7,7 @@ package bazydanych;
 
 /**
  *
+ * @author stefan
  * @author drazkiew
  * @author 2 robal94
  */
