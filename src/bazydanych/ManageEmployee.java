@@ -7,7 +7,7 @@ package bazydanych;
 
 /**
  *
- * @author drazkiew
+ * @author stefan
  */
 import java.util.*;
  
