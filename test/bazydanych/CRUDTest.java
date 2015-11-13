@@ -18,22 +18,22 @@ public class CRUDTest {
     }
 
     @Test
-    public void CreateTest() {
+    public void CreateTest() {//Wojtek
         assert (true);
     }
 
     @Before
-    public void ReadTest() {
+    public void ReadTest() {//Wojtek
         assert (true);
     }
 
     @Test
-    public void UpdateTest() {
+    public void UpdateTest() {//Tobiasz
         assert (true);
     }
 
     @Test
-    public void DeleteTest() {
+    public void DeleteTest() {//Tobiasz
         assert (true);
     }
 
