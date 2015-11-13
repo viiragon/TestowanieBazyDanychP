@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="Employee" table="EMPLOYEE">
+   <class name="bazydanych.Employee" table="EMPLOYEE">
       <meta attribute="class-description">
          This class contains the employee detail. 
       </meta>
@@ -13,14 +13,14 @@
       </id>
       <set name="certificates" cascade="all">
          <key column="employee_id"/>
-         <one-to-many class="Certificate"/>
+         <one-to-many class="bazydanych.Certificate"/>
       </set>
       <property name="firstName" column="first_name" type="string"/>
       <property name="lastName" column="last_name" type="string"/>
       <property name="salary" column="salary" type="int"/>
    </class>
-
-   <class name="Certificate" table="CERTIFICATE">
+   
+   <class name="bazydanych.Certificate" table="CERTIFICATE">
       <meta attribute="class-description">
          This class contains the certificate records. 
       </meta>

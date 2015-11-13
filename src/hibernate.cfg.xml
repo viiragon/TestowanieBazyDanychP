@@ -5,21 +5,21 @@
 <hibernate-configuration>
    <session-factory>
    <property name="hibernate.dialect">
-      org.hibernate.dialect.PostgreSQLDialect
+      org.hibernate.dialect.DerbyDialect
    </property>
    <property name="hibernate.connection.driver_class">
-      org.postgresql.Driver
+      org.apache.derby.jdbc.ClientDriver
    </property>
 
    <!-- Assume test is the database name -->
    <property name="hibernate.connection.url">
-      jdbc:postgresql://localhost/test
+      jdbc:derby://localhost:1527/baza
    </property>
    <property name="hibernate.connection.username">
       root
    </property>
    <property name="hibernate.connection.password">
-      root123
+      password
    </property>
 
    <!-- List of XML mapping files -->

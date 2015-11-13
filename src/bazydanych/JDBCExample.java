@@ -14,11 +14,11 @@ import java.sql.*;
 
 public class JDBCExample {
    // JDBC driver name and database URL
-   static final String JDBC_DRIVER = "org.postgresql.Driver";  
-   static final String DB_URL = "jdbc:postgresql://localhost/baza";
+   static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";  
+   static final String DB_URL = "jdbc:derby://localhost:1527/baza";
 
    //  Database credentials
-   static final String USER = "user";
+   static final String USER = "root";
    static final String PASS = "password";
    
    public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class JDBCExample {
    Statement stmt = null;
    try{
       //STEP 2: Register JDBC driver
-      Class.forName("org.postgresql.Driver");
+      Class.forName(JDBC_DRIVER).newInstance();
 
       //STEP 3: Open a connection
       System.out.println("Connecting to database...");
@@ -36,7 +36,9 @@ public class JDBCExample {
       System.out.println("Creating database...");
       stmt = conn.createStatement();
       
-      String sql = "CREATE DATABASE BAZA";
+      String sql = "create table miasta ("
+              + "nazwa varchar(60)"
+              + ", wojewodztwo varchar(60))";
       stmt.executeUpdate(sql);
       System.out.println("Database created successfully...");
    }catch(SQLException se){

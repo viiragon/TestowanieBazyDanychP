@@ -18,6 +18,23 @@ import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/*Database preparation commands:
+create table EMPLOYEE (
+   id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+   first_name VARCHAR(20) default NULL,
+   last_name  VARCHAR(20) default NULL,
+   salary     INT  default NULL
+);
+create table CERTIFICATE (
+   id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+   certificate_name VARCHAR(30) default NULL,
+   employee_id INT default NULL
+);
+Clear:
+delete from EMPLOYEE;
+delete from CERTIFICATE;
+*/
+
 public class ManageEmployee {
    private static SessionFactory factory; 
    public static void main(String[] args) {
@@ -57,6 +74,7 @@ public class ManageEmployee {
       /* List down all the employees */
       ME.listEmployees();
 
+      System.exit(0);
    }
 
    /* Method to add an employee record in the database */
