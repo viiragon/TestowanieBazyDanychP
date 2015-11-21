@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="bazydanych.Samochod" table="SAMOCHOD">
+      <meta attribute="class-description">
+         Opis samochodu 
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="marka" column="marka" type="string"/>
+      <property name="cena" column="cena" type="int"/>
+   </class>
+
+</hibernate-mapping>
