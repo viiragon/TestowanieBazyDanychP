@@ -17,11 +17,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 /**
@@ -126,6 +125,7 @@ public class CRUDTest {
             ex.printStackTrace();
             fail();
         }
+        System.out.println("OK");
     }
 
     @Test
@@ -137,7 +137,39 @@ public class CRUDTest {
     @Test
     public void updateTest() {
         System.out.println("\nTest: updateTest");
-        assert (true);
+        
+        try {
+        Connection conn = null;
+        Class.forName(JDBC_DRIVER).newInstance();
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        Statement stmt = conn.createStatement();
+        String sql = "UPDATE CERTIFICATE SET" //zmiana nazwy certyfikatu
+                +"CERTIFICATE_NAME=SPR"
+                +"WHERE ID = 2";
+        stmt.executeUpdate(sql);
+        stmt.close();
+        String sql2 = "SELECT CERTIFICATE_NAME" //odczytywanie nowej wartości
+                + "FROM CERTIFICATE WHERE ID = 2";
+        Statement stmt2 = conn.createStatement();
+        stmt2.executeUpdate(sql2);
+        ResultSet rs = stmt2.getResultSet();
+        while (rs.next()) {
+            String s1 = rs.getString("CERTIFICATE_NAME");
+            String s2 = "SPR";
+            assertTrue(s1.equals(s2)); //sprawdzanie poprawności podstawienia
+        }
+        rs.close();
+        Statement stmt3 = conn.createStatement();
+        String sql3 = "UPDATE CERTIFICATE SET"//powót do stanu początkowego bazy danych
+                +"CERTIFICATE_NAME=PMP"
+                +"WHERE ID = 2";
+        stmt3.executeUpdate(sql3);
+        
+        stmt.close();
+        conn.close();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+            Logger.getLogger(CRUDTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Test
