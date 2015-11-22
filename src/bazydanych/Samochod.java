@@ -43,4 +43,9 @@ public class Samochod {
     public void setCena(int cena) {
         this.cena = cena;
     }
+    
+    @Override
+    public String toString() {
+        return id + " : " + marka + " : " + cena;
+    }
 }
