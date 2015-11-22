@@ -31,6 +31,8 @@ import org.junit.BeforeClass;
  *
  * @author Wojtek
  */
+
+/*create table samochod (id integer not null generated always as identity (start with 1, increment by 1), marka varchar(40), cena int)*/
 public class CRUDTest {
 
     private static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
@@ -78,11 +80,10 @@ public class CRUDTest {
         } catch (SQLException e) {
             System.out.println("Tablica samochod nie istnieje, tworze nowa");
         }
-        String sql = "create table samochod (\n"
-                + " id integer not null generated always as identity (start with 1, increment by 1)\n"
-                + ", marka varchar(40)\n"
-                + ", cena int\n"
-                + ")";
+        String sql = "create table samochod ("
+                + "id integer not null generated always as identity (start with 1, increment by 1)"
+                + ", marka varchar(40)"
+                + ", cena int)";
         try {
             testStatement.executeUpdate(sql);
         } catch (SQLException ex) {

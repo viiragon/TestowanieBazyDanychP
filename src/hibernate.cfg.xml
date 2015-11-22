@@ -24,6 +24,7 @@
 
    <!-- List of XML mapping files -->
    <mapping resource="Samochod.hbm.xml"/>
+   <mapping resource="Employee.hbm.xml"/>
 
 </session-factory>
 </hibernate-configuration>
