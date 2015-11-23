@@ -187,13 +187,51 @@ public class CRUDTest {
     @Test
     public void updateTest() {
         System.out.println("\nTest: updateTest");
-      
+        String carName1 = "Fiat 125p", carName2 = "Mercedes Benz";
+        int carPrice1 = 540, carPrice2 = 143000;
+
+        System.out.println("Dodany samochod " + carName1 + " id : " + createCar(carName1, carPrice1));
+        System.out.println("Dodany samochod " + carName2 + " id : " + createCar(carName2, carPrice2));
+
+        String sql = "UPDATE \"SAMOCHOD\" SET CENA=1000 WHERE id = 1";
+        try {
+            testStatement.executeUpdate(sql);
+            System.out.println("Zaktualizowano Fiat 125p cena 1000");
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUDTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+        
+        Samochod[] list = readCars();
+        Samochod tmp = list[0];
+       
+        assert(tmp.getCena()==1000);
+        
+        System.out.println("OK");
     }
 
     @Test
     public void deleteTest() {
         System.out.println("\nTest: deleteTest");
-        assert (true);
+        String carName1 = "Fiat 125p", carName2 = "Mercedes Benz";
+        int carPrice1 = 540, carPrice2 = 143000;
+
+        System.out.println("Dodany samochod " + carName1 + " id : " + createCar(carName1, carPrice1));
+        System.out.println("Dodany samochod " + carName2 + " id : " + createCar(carName2, carPrice2));
+
+        String sql = "DELETE FROM \"SAMOCHOD\" WHERE id = 1";
+        try {
+            testStatement.executeUpdate(sql);
+            System.out.println("Usunięto rekord o id = 1");
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUDTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+        Samochod[] list = readCars();
+        assert(list.length == 1);
+        
+        System.out.println("OK");
     }
 
     
