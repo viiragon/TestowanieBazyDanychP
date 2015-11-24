@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="bazydanych.ksiazki.Ksiazka" table="KSIAZKA">
+      <meta attribute="class-description">
+         Opis ksiazki
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <set name="bohaterowie" cascade="all">
+         <key column="ksiazkaId"/>
+         <one-to-many class="bazydanych.ksiazki.Bohater"/>
+      </set>
+      <property name="tytul" column="tytul" type="string"/>
+   </class>
+   
+   <class name="bazydanych.ksiazki.Bohater" table="BOHATER">
+      <meta attribute="class-description">
+         Opis bohatera ksiazki
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="imie" column="imie" type="string"/>
+      <property name="nazwisko" column="nazwisko" type="string"/>
+   </class>
+
+</hibernate-mapping>
