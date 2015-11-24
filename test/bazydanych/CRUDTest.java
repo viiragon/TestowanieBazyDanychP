@@ -193,15 +193,9 @@ public class CRUDTest {
         System.out.println("Dodany samochod " + carName1 + " id : " + createCar(carName1, carPrice1));
         System.out.println("Dodany samochod " + carName2 + " id : " + createCar(carName2, carPrice2));
 
-        String sql = "UPDATE \"SAMOCHOD\" SET CENA=1000 WHERE id = 1";
-        try {
-            testStatement.executeUpdate(sql);
-            System.out.println("Zaktualizowano Fiat 125p cena 1000");
-        } catch (SQLException ex) {
-            Logger.getLogger(CRUDTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          
-        
+        updateCar(1, 1000);
+        System.out.println("Zaktualizowano Fiat 125p cena 1000");
+       
         Samochod[] list = readCars();
         Samochod tmp = list[0];
        
@@ -219,13 +213,8 @@ public class CRUDTest {
         System.out.println("Dodany samochod " + carName1 + " id : " + createCar(carName1, carPrice1));
         System.out.println("Dodany samochod " + carName2 + " id : " + createCar(carName2, carPrice2));
 
-        String sql = "DELETE FROM \"SAMOCHOD\" WHERE id = 1";
-        try {
-            testStatement.executeUpdate(sql);
-            System.out.println("Usunięto rekord o id = 1");
-        } catch (SQLException ex) {
-            Logger.getLogger(CRUDTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        deleteCar(1);
+        System.out.println("Usunięto rekord o id = 1");
        
         
         Samochod[] list = readCars();
@@ -281,12 +270,46 @@ public class CRUDTest {
         return retList;
     }
 
+     public void updateCar(Integer ID, int cena ){
+      Session session = factory.openSession();
+      Transaction tx = null;
+      try{
+         tx = session.beginTransaction();
+         Samochod car= 
+                    (Samochod)session.get(Samochod.class, ID); 
+         car.setCena( cena );
+         session.update(car);
+         tx.commit();
+      }catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+      }finally {
+         session.close(); 
+      }
+   }
+     public void deleteCar(Integer ID){
+      Session session = factory.openSession();
+      Transaction tx = null;
+      try{
+         tx = session.beginTransaction();
+         Samochod car = 
+                   (Samochod)session.get(Samochod.class, ID); 
+         session.delete(car); 
+         tx.commit();
+      }catch (HibernateException e) {
+         if (tx!=null) tx.rollback();
+         e.printStackTrace(); 
+      }finally {
+         session.close(); 
+      }
+   }
+    
 }
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+
 package bazydanych;
 
 import java.sql.Connection;
@@ -312,9 +335,9 @@ import org.junit.BeforeClass;
 /**
  *
  * @author Wojtek
- */
+ 
 
-/*create table samochod (id integer not null generated always as identity (start with 1, increment by 1), marka varchar(40), cena int)*/
+/*create table samochod (id integer not null generated always as identity (start with 1, increment by 1), marka varchar(40), cena int)
 public class CRUDTest {
 
     private static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
@@ -556,3 +579,4 @@ public class CRUDTest {
     }
 
 }
+*/
